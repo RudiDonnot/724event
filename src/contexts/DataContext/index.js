@@ -24,14 +24,7 @@ export const DataProvider = ({ children }) => {
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
 
-  const getData = useCallback(async () => {
-    try {
-      const result = await api.loadData();
-      setData(result);
-    } catch (err) {
-      setError(err);
-    }
-  }, []);
+  const getData = useCallback(async () => {}, []);
 
   useEffect(() => {
     if (!data) {
