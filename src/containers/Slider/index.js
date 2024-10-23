@@ -7,19 +7,16 @@ const Slider = () => {
   const { data } = useData();
   const [index, setIndex] = useState(0);
 
-  // Tri des données
   const byDateDesc = [...(data?.focus || [])].sort(
     (evtA, evtB) => new Date(evtB.date) - new Date(evtA.date)
   );
 
-  // Fonction pour passer à la prochaine carte
   const nextCard = () => {
     setIndex((prevIndex) =>
       prevIndex < byDateDesc.length - 1 ? prevIndex + 1 : 0
     );
   };
 
-  // Utilisation de useEffect
   useEffect(() => {
     const timer = setTimeout(nextCard, 5000);
     return () => clearTimeout(timer);
@@ -34,7 +31,7 @@ const Slider = () => {
               index === idx ? "display" : "hide"
             }`}
           >
-            <img src={event.cover} alt="forum" />
+            <img src={process.env.PUBLIC_URL + event.cover} alt="forum" />
             <div className="SlideCard__descriptionContainer">
               <div className="SlideCard__description">
                 <h3>{event.title}</h3>
@@ -49,7 +46,7 @@ const Slider = () => {
         <div className="SlideCard__pagination">
           {byDateDesc.map((event, radioIdx) => (
             <input
-              key={event.title} // Utiliser un identifiant unique si possible
+              key={event.title}
               type="radio"
               name="radio-button"
               checked={index === radioIdx}
